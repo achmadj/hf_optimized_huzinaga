@@ -3,12 +3,6 @@ import numpy as np
 from scipy import special
 
 def buildS(basis, S):
-  """
-  Pass in an empty KxK overlap integral matrix, S.
-  Calling the function (Sxyz) to calculate each Gaussian primitive overlap integral,
-  compute all elements of the S = (A|B) 2-dimensional matrix.
-  (Handout 4, Eq. 1)
-  """
   for A, bA in enumerate(basis):    # retrieve atomic orbital A from the basis
     for B, bB in enumerate(basis):  # retrieve atomic orbital B from the basis
 
@@ -30,10 +24,6 @@ def buildS(basis, S):
   return S
 
 def Sxyz(RA,RB,a,b,lA,lB,mA,mB,nA,nB):
-  """
-  Calculate the Gaussian primitive overlap integral.
-  (Handout 4, Eq. 2)
-  """
   RP = gaussianProduct(a,RA,b,RB,a+b) # g = a + b
 
   sx = si(lA,lB,a+b,RA[0],RB[0],RP[0])
@@ -43,10 +33,6 @@ def Sxyz(RA,RB,a,b,lA,lB,mA,mB,nA,nB):
   return sx*sy*sz
 
 def si(lA,lB,g,Ai,Bi,Pi):
-  """
-  Calculate the i-th component (x, y, or z) contribution to (A|B).
-  (Handout 4, Eq. 3)
-  """
   si = 0.0
   for j in range(0,int((lA+lB)/2)+1):
     if special.factorial2(2*j-1, exact=True) == 0:
@@ -59,11 +45,6 @@ def si(lA,lB,g,Ai,Bi,Pi):
   return si 
 
 def buildT(basis, T):
-  """
-  Build the kinetic energy integral matrix. 
-  Call on function Kxyz to calculate integrals over primitives.
-  (part of Handout 4, Eq. 10)
-  """
   for A, bA in enumerate(basis):
     for B, bB in enumerate(basis):
 
@@ -84,10 +65,6 @@ def buildT(basis, T):
   return T
 
 def Kxyz(RA,RB,a,b,lA,lB,mA,mB,nA,nB):
-  """
-  Calculate the kinetic energy integral over primitives, for components x, y, z.
-  (the "integral" part of Handout 4, Eq. 10)
-  """
   K  = b*(2*(lB+mB+nB)+3)*Sxyz(RA,RB,a,b,lA,lB,mA,mB,nA,nB) # line 1 of Eq. 10
 
   K -= (2*b**2)*Sxyz(RA,RB,a,b,lA,lB+2,mA,mB,nA,nB) # line 2
@@ -101,11 +78,6 @@ def Kxyz(RA,RB,a,b,lA,lB,mA,mB,nA,nB):
   return K
 
 def buildV(basis, V, R, Z, atoms):
-  """
-  Calculate the product of the x, y, and z components of the nuclear-attraction 
-  integral over the Gaussian primitives.
-  (part of Handout 4, Eq. 13)
-  """  
   for A, bA in enumerate(basis):
     for B, bB in enumerate(basis):
       for C, rC in enumerate(R):
@@ -123,11 +95,6 @@ def buildV(basis, V, R, Z, atoms):
   return V
 
 def Vxyz(lA,mA,nA,lB,mB,nB,a,b,RA,RB,RC,Z):
-  """
-  Calculate the product of the x, y, and z components of the nuclear-attraction 
-  integral over the Gaussian primitives.
-  (the "integral" part of Handout 4, Eq. 13)
-  """
   g = a + b
 
   RP = gaussianProduct(a,RA,b,RB,g)
@@ -165,11 +132,6 @@ def Vxyz(lA,mA,nA,lB,mB,nB,a,b,RA,RB,RC,Z):
   return Vxyz
 
 def vi(l,r,i, lA,lB,Ai,Bi,Ci,Pi,g):
-  """
-  Calculate the $i-th$ component of the nuclear-attraction integral over
-  Gaussian primitives.
-  (Handout 4, Eq. 14)
-  """
 
   eps = 1/(4*g) # (Handout 4, Eq. 15)
   
@@ -212,18 +174,10 @@ def ck(j,l,m,a,b):
   return coefficient
 
 def N(a,l,m,n):
-  """
-  Calculate the normalization factors.
-  (Handout 4, Eq. 9)
-  """
   N = (2*a/math.pi)**(3/4) * (((8*a)**(l+m+n) * special.factorial(l,exact=True) * special.factorial(m,exact=True) * special.factorial(n,exact=True))/(special.factorial(2*l,exact=True) * special.factorial(2*m,exact=True) * special.factorial(2*n,exact=True)))**(1/2)
   return N
 
 def gaussianProduct(a,RA,b,RB,g):
-  """
-  The product of two Gaussians is a third Gaussian.
-  (Handout 4, Eq. 5)
-  """
   P = []
   for i in range(3):
     P.append( (a*RA[i]+b*RB[i])/g )
@@ -231,8 +185,4 @@ def gaussianProduct(a,RA,b,RB,g):
   return P
 
 def IJsq(RI,RJ):
-  """
-  Calculate the square of the distance between two points.
-  (Handout 4, Eq. 6)
-  """
   return sum( (RI[i]-RJ[i])**2 for i in (0,1,2) )
