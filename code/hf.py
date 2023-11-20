@@ -8,11 +8,6 @@ print("")
 ## pass in the number of electrons N, the nuclear repulsion energy Vnn, ...
 ## ... the molecular integrals S, T, V, and G, and the number of AOs K
 def compute_HFenergy(N, Vnn, S, T, V, G, K):
-  """
-  Calculate the electronic energy using the Hartree-Fock procedure,
-  and then append to it the nuclear-nuclear repulsion energy.
-  (Handout 5)
-  """
   Hcore = T + V # (Eq. 1)
   D     = np.zeros((K,K)) # create an empty KxK density matrix;
   P     = np.zeros((K,K)) # create the KxK two-electron contribution
