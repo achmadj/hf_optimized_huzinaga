@@ -3,11 +3,6 @@ import numpy as np
 from scipy import special 
 
 def buildG(basis, G, K):
-  """
-  Calling the intermediate function Gxyz to calculate integrals over primitives,
-  compute all elements of the G = (AB|CD) 4-dimensional matrix.
-  (part of Handout 4, Eq. 18)
-  """
   Ntei = 0 # create a two-electron integral counter, as TEIs can take a long time
   for A, bA in enumerate(basis): # retrieve atomic orbital A from basis
     for B, bB in enumerate(basis):
@@ -39,11 +34,6 @@ def buildG(basis, G, K):
   return G
 
 def Gxyz(lA,mA,nA,lB,mB,nB,lC,mC,nC,lD,mD,nD,a,b,c,d,RA,RB,RC,RD):
-  """
-  Calling intermediate function gi to calculate individual x,y,z components,
-  calculate integrals over primitives.
-  (bracketed part of Handout 4, Eq. 18)
-  """
   gP = a + b
   gQ = c + d
 
@@ -97,10 +87,6 @@ def Gxyz(lA,mA,nA,lB,mB,nB,lC,mC,nC,lD,mD,nD,a,b,c,d,RA,RB,RC,RD):
   return Gxyz
 
 def gi(l,lp,r,rp,i, lA,lB,Ai,Bi,Pi,gP, lC,lD,Ci,Di,Qi,gQ):
-  """
-  Calculate the i-th coordinate component of the integral over primitives.
-  (Handout 4, Eq. 22)
-  """
   delta = 1/(4*gP) + 1/(4*gQ)
 
   gi  = (-1)**l 
@@ -114,10 +100,6 @@ def gi(l,lp,r,rp,i, lA,lB,Ai,Bi,Pi,gP, lC,lD,Ci,Di,Qi,gQ):
   return gi
 
 def theta(l,lA,lB,PA,PB,r,g):
-  """
-  Calculate the theta factor of the gi term.
-  (Handout 4, Eq. 23)
-  """
   theta  = ck(l,lA,lB,PA,PB) 
   theta *= special.factorial(l,exact=True) * g**(r-l) 
   theta /= special.factorial(r,exact=True) * special.factorial(l-2*r,exact=True) 
@@ -125,12 +107,6 @@ def theta(l,lA,lB,PA,PB,r,g):
   return theta
 
 def ck(j,l,m,a,b):
-  """
-  Calculate the coefficient 'ck' factor within the theta expression,
-  associated with a third center between position vectors
-  of the nuclei A and B.
-  (Handout 4, Eq. 8)
-  """
   coefficient = 0.0
  
   for k in range(0,l+1):
@@ -141,10 +117,6 @@ def ck(j,l,m,a,b):
   return coefficient
 
 def N(a,l,m,n):
-  """
-  Calculate the normalization factors.
-  (Handout 4, Eq. 9)
-  """
   N = (2*a/math.pi)**(3/4) * (((8*a)**(l+m+n) * special.factorial(l,exact=True) * special.factorial(m,exact=True) * special.factorial(n,exact=True))/(special.factorial(2*l,exact=True) * special.factorial(2*m,exact=True) * special.factorial(2*n,exact=True)))**(1/2)
   return N
 
@@ -161,10 +133,6 @@ def BoysFunction(nu, x):
     return (1/2) * x**(-(nu+0.5)) * special.gamma(nu+0.5) * special.gammainc(nu+0.5,x) # (Handout 4, Eq. 16)
   
 def gaussianProduct(a,RA,b,RB,g):
-  """
-  The product of two Gaussians is a third Gaussian.
-  (Handout 4, Eq. 5)
-  """
   P = []
   for i in range(3):
     P.append( (a*RA[i]+b*RB[i])/g )
@@ -172,8 +140,4 @@ def gaussianProduct(a,RA,b,RB,g):
   return P
 
 def IJsq(RI,RJ):
-  """
-  Calculate the square of the distance between two points.
-  (Handout 4, Eq. 6)
-  """
   return sum( (RI[i]-RJ[i])**2 for i in (0,1,2) )
