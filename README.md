@@ -8,3 +8,10 @@ This repository contains the implementation of a Hartree-Fock (HF) electronic st
 
 - **Hartree-Fock Method**: Implementing the HF method for electronic structure calculations.
 - **Huzinaga Gaussian Orbital Functions**: Utilizing optimized Huzinaga Gaussian orbital functions for improved accuracy.
+
+## Installation
+
+To install the required dependencies, including the PySCF library, you can use the following command:
+
+```bash
+pip install pyscf
