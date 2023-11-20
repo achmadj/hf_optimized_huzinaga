@@ -151,17 +151,9 @@ def electronCount(atoms):
   return N
 
 def IJsq(RI,RJ):
-  """
-  Compute the square of the distance between two points.
-  (Handout 4, Eq 6)
-  """
   return sum( (RI[i]-RJ[i])**2 for i in (0,1,2) )
 
 def nuclearRepulsion(atoms):
-  """
-  Calculate the nuclear-nuclear repulsion energy.
-  (Handout 5, Eq. 9)
-  """
   Vnn = 0.0
   for a, A in enumerate(atoms):
     for b, B in enumerate(atoms):
