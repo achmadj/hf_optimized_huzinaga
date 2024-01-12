@@ -14,4 +14,4 @@ pip install pyscf
 
 ## Publication
 Physica Scripta:
-[https://doi.org/10.1088/1402-4896/ad1ad6](https://doi.org/10.1088/1402-4896/ad1ad6).
+[https://doi.org/10.1088/1402-4896/ad1ad6](https://doi.org/10.1088/1402-4896/ad1ad6)
