@@ -2,7 +2,7 @@
 
 Hartree-Fock Roothaan Calculations Using Optimized Huzinaga Orbitals on Small Molecules
 
-This repository contains methods to optimize the Huzinaga Gaussian orbital functions and the code used to perform Hartree-Fock calculations using the optimized Huzinaga Gaussian orbital functions. The goal is to achieve the ground state energy of small diatomic molecules using optimized STO-6G Huzinaga basis set to be on par (or better) with larger basis set (e.g. 6-31G, cc-pVQZ). The PySCF library is utilized to perform the Hartree-Fock calculations.
+The repository includes techniques for optimizing Huzinaga Gaussian orbital functions and the corresponding code for conducting Hartree-Fock calculations. The objective is to attain the ground state energy of small diatomic molecules by employing an optimized STO-6G Huzinaga basis set that rivals or surpasses larger sets (e.g., 6-31G, cc-pVQZ). The Hartree-Fock calculations are carried out using the PySCF library.
 
 ## Installation
 
@@ -13,4 +13,5 @@ pip install pyscf
 ```
 
 ## Publication
-The code is developed to support and reproduce the results presented in the research paper titled "Hartree-Fock Roothaan Calculations Using Optimized Huzinaga Orbitals on Small Molecules".
+Physica Scripta:
+[https://doi.org/10.1088/1402-4896/ad1ad6](https://doi.org/10.1088/1402-4896/ad1ad6).
